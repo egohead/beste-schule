@@ -20,7 +20,8 @@
           "enable_homework_calendar": "Hausaufgaben-Kalender",
           "enable_exam_calendar": "Arbeiten-Kalender",
           "enable_notice_calendar": "Hinweise-Kalender",
-          "enable_homework_todo": "Hausaufgaben-To-do-Liste"
+          "enable_homework_todo": "Hausaufgaben-To-do-Liste",
+          "show_grade_tendency": "Notentendenz anzeigen (+/-)"
         },
         "data_description": {
           "enable_timetable_calendar": "Erstellt einen Home-Assistant-Kalender für Unterrichtsstunden.",
@@ -28,7 +29,8 @@
           "enable_homework_calendar": "Erstellt einen Home-Assistant-Kalender für Hausaufgaben.",
           "enable_exam_calendar": "Erstellt einen Home-Assistant-Kalender für Arbeiten, LK und Tests.",
           "enable_notice_calendar": "Erstellt einen Home-Assistant-Kalender für schulweite Tageshinweise.",
-          "enable_homework_todo": "Erstellt eine Home-Assistant-To-do-Liste für Hausaufgaben."
+          "enable_homework_todo": "Erstellt eine Home-Assistant-To-do-Liste für Hausaufgaben.",
+          "show_grade_tendency": "Ergänzt die Notenlisten um Noten mit Tendenz wie „2+“. Durchschnitte bleiben unverändert, wie in beste.schule zählt eine 2+ oder 2- als 2."
         }
       },
       "reauth_confirm": {
@@ -58,7 +60,8 @@
           "enable_homework_calendar": "Hausaufgaben-Kalender",
           "enable_exam_calendar": "Arbeiten-Kalender",
           "enable_notice_calendar": "Hinweise-Kalender",
-          "enable_homework_todo": "Hausaufgaben-To-do-Liste"
+          "enable_homework_todo": "Hausaufgaben-To-do-Liste",
+          "show_grade_tendency": "Notentendenz anzeigen (+/-)"
         },
         "data_description": {
           "enable_timetable_calendar": "Erstellt einen Home-Assistant-Kalender für Unterrichtsstunden.",
@@ -66,7 +69,8 @@
           "enable_homework_calendar": "Erstellt einen Home-Assistant-Kalender für Hausaufgaben.",
           "enable_exam_calendar": "Erstellt einen Home-Assistant-Kalender für Arbeiten, LK und Tests.",
           "enable_notice_calendar": "Erstellt einen Home-Assistant-Kalender für schulweite Tageshinweise.",
-          "enable_homework_todo": "Erstellt eine Home-Assistant-To-do-Liste für Hausaufgaben."
+          "enable_homework_todo": "Erstellt eine Home-Assistant-To-do-Liste für Hausaufgaben.",
+          "show_grade_tendency": "Ergänzt die Notenlisten um Noten mit Tendenz wie „2+“. Durchschnitte bleiben unverändert, wie in beste.schule zählt eine 2+ oder 2- als 2."
         }
       }
     }

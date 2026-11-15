@@ -170,3 +170,35 @@ def test_timetable_card_rows_include_modern_time_key(monkeypatch) -> None:
 
     assert rows[0]["Stunde"] == "08:00-08:45"
     assert rows[0]["time"] == "08:00-08:45"
+
+
+@pytest.mark.parametrize(
+    ("item", "expected"),
+    [
+        ({"value": "2+"}, "2+"),
+        ({"value": "3-"}, "3-"),
+        ({"value": " 1 - "}, "1-"),
+        ({"value": "4"}, "4"),
+        ({"value": 2}, "2"),
+        ({"value": 2, "tendency": "+"}, "2+"),
+        ({"value": {"value": "5", "tendency": "-"}}, "5-"),
+        ({"value": 2.5}, None),
+        ({"value": "sehr gut"}, None),
+        ({}, None),
+    ],
+)
+def test_grade_text_keeps_tendency(item, expected) -> None:
+    """Grade texts keep the +/- tendency shown in beste.schule."""
+    assert sensor._grade_text(item) == expected
+
+
+def test_grade_tendency_does_not_change_values() -> None:
+    """Tendencies are display-only; numeric values stay whole grades."""
+    data = {
+        "grades": [
+            {"value": "2+", "subject": {"name": "Mathe"}, "collection": {"type": "KA"}},
+            {"value": "3-", "subject": {"name": "Mathe"}, "collection": {"type": "LK"}},
+        ]
+    }
+    assert sensor._subject_grade_values(data, "Mathe") == ([2.0], [3.0])
+    assert sensor._subject_grade_texts(data, "Mathe") == (["2+"], ["3-"])

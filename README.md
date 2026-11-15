@@ -29,6 +29,7 @@ Diese Custom Integration verbindet Home Assistant über einen Personal Access To
 - Sensor für die Klasse
 - Stundenplan-JSON-Sensor für `fabel-smith/stundenplan-card`
 - Optionen zum Aktivieren oder Deaktivieren der Kalender und der Hausaufgaben-To-do-Liste
+- Optionale Anzeige der Notentendenz (`2+`, `3-`) in den Attributen `classwork_grades_text` und `other_grades_text` der Notensensoren; Durchschnitte bleiben unverändert
 - Übersetzungen für Deutsch, Englisch, Türkisch, Polnisch und weitere gängige Home-Assistant-Sprachen
 - Unterstützung für mehrere Kinder innerhalb eines beste.schule-Kontos
 

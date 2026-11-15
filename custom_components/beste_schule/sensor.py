@@ -28,7 +28,7 @@ from .calendar import (
     _parse_date,
     _period_time_map,
 )
-from .const import DOMAIN
+from .const import CONF_SHOW_GRADE_TENDENCY, DEFAULT_OPTIONS, DOMAIN
 from .coordinator import BesteSchuleDataUpdateCoordinator, coordinators_for_entry
 from .entity import besteschule_device_info, student_data_from_data
 from .presence import lesson_boundary_manager
@@ -163,6 +163,50 @@ def _parse_grade(value: Any) -> float | None:
         return None
 
     return float(match.group(1))
+
+
+def _grade_text(item: Any) -> str | None:
+    """Return a grade as shown in beste.schule, including a +/- tendency."""
+    if not isinstance(item, dict):
+        return None
+    value = item.get("value")
+    tendency = item.get("tendency") or item.get("grade_tendency")
+    if isinstance(value, dict):
+        tendency = tendency or value.get("tendency")
+        value = value.get("value") or value.get("grade") or value.get("name")
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        if value != int(value):
+            return None
+        text = str(int(value))
+    elif isinstance(value, str):
+        match = re.search(r"([1-6])\s*([+-])?", value.strip())
+        if not match:
+            return None
+        text = match.group(1) + (match.group(2) or "")
+    else:
+        return None
+    if tendency in ("+", "-") and not text.endswith(("+", "-")):
+        text += tendency
+    return text
+
+
+def _subject_grade_texts(
+    data: dict[str, Any],
+    subject: str,
+) -> tuple[list[str], list[str]]:
+    """Return classwork and other grades as text, keeping +/- tendencies."""
+    classwork: list[str] = []
+    other: list[str] = []
+    for item in _data_list(data.get("grades")):
+        if not isinstance(item, dict) or _subject_name(item) != subject:
+            continue
+        if _parse_grade(item.get("value")) is None:
+            continue
+        text = _grade_text(item)
+        if text is None:
+            continue
+        (classwork if _is_classwork(item) else other).append(text)
+    return classwork, other
 
 
 def _parse_decimal(value: Any) -> float | None:
@@ -1151,6 +1195,13 @@ class BesteSchuleGradeAverageSensor(
             "classwork_grades": classwork_values,
             "other_grades": other_values,
         }
+        if {**DEFAULT_OPTIONS, **self._entry.options}.get(CONF_SHOW_GRADE_TENDENCY):
+            # Tendencies are display-only: beste.schule counts a 2+ or 2- as a 2 in averages.
+            classwork_texts, other_texts = _subject_grade_texts(
+                self.coordinator.data, self._subject
+            )
+            attributes["classwork_grades_text"] = classwork_texts
+            attributes["other_grades_text"] = other_texts
         history = _grade_year_history(self.coordinator.data, self._subject)
         if history:
             attributes.update(history)

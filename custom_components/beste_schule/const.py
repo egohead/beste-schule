@@ -12,6 +12,7 @@ CONF_ENABLE_HOMEWORK_CALENDAR = "enable_homework_calendar"
 CONF_ENABLE_EXAM_CALENDAR = "enable_exam_calendar"
 CONF_ENABLE_NOTICE_CALENDAR = "enable_notice_calendar"
 CONF_ENABLE_HOMEWORK_TODO = "enable_homework_todo"
+CONF_SHOW_GRADE_TENDENCY = "show_grade_tendency"
 DEFAULT_NAME = "beste.schule"
 
 PLATFORMS = ["sensor", "calendar", "binary_sensor", "todo", "number"]
@@ -23,4 +24,5 @@ DEFAULT_OPTIONS = {
     CONF_ENABLE_EXAM_CALENDAR: True,
     CONF_ENABLE_NOTICE_CALENDAR: True,
     CONF_ENABLE_HOMEWORK_TODO: True,
+    CONF_SHOW_GRADE_TENDENCY: False,
 }

@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Optional setting „Notentendenz anzeigen (+/-)“ (`show_grade_tendency`, off by default). When enabled, grade sensors expose `classwork_grades_text` and `other_grades_text` with grades as shown in beste.schule, e.g. `2+` or `3-`.
+
+### Compatibility
+
+- Averages and the existing `classwork_grades` / `other_grades` attributes are unchanged. As in beste.schule, a 2+ or 2- still counts as 2.
+
 ## 1.0.5-beta.1 - 2026-09-27
 
 ### Added
